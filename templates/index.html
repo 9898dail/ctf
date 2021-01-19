@@ -1,0 +1,79 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content%}
+<!-- <img src="img_avatar.png" alt="Avatar" style="width:100%"> -->
+<style>
+.cardofctf{
+    max-width: 400px;
+    height: 300px;
+	border-radius: 8px;
+	margin-left: 350px;
+
+}
+.container{
+    width: 100%;
+    height: 100%;
+	border-radius: 8px;
+}
+.containermessage{
+	font-size: 25px;
+	margin-top: 25px;
+    max-width: 1200px;
+
+}
+</style>
+
+<div class="card text-center text-white cardofctf" >
+	<a class="container bg-dark" data-toggle="modal" data-target="#exampleModal">
+		<h4><b>{{ctf.type}}</b></h4>
+		<p>{{ctf.name}}</p>
+	</a>
+</div>
+<div class="container bg-dark text-white containermessage">
+	<div>
+		<strong>
+			{{message_wrong}}
+		</strong>
+	</div>
+</div>
+<div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+	<div class="modal-dialog bg-dark modal-notify modal-success" role="document">
+		<div class="modal-content bg-dark text-white text-center">
+			<div class="modal-header">
+				<h5 class="modal-title w-100" id="exampleModalLabel">Blue Fish</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>	
+			<form action="" method="post">
+				<div class="modal-body modal-dark text-white text-center">
+					<div class="container">
+
+						<p>After we chase the evil blue fish to his castle in the depths of the ocean, he managed to escape from us and destroy all of his data.
+								
+							We only mange to extract one pdf that contains his image and the most important application from Blue fish data/
+								
+							we figure out that the application save Blue fish password to his website where he save all of his evedince to his crimes.
+							As our first commander you will probably understand how to get the password from the application.
+						
+							BTW: When we chase him we heard him saying to the Red-Fish "don't worry, they don't know what is pdf-paser..."
+						</p>
+						<a href="/static/files/Blue_Fish_Image.pdf" download>Download</a>
+							
+					</div>
+					<div class="container">
+						{% csrf_token %}
+						{{password_form}}
+					</div>
+					<div class="modal-footer">
+						<button name="editForm" type="submit" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
